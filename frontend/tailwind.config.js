@@ -2,8 +2,9 @@
    module.exports = {
     content: [
     "./**/.{js,ts,jsx,tsx}", // Note the addition of the app directory.
-    "./pages//*.{js,ts,jsx,tsx}",
-    "./components//*.{js,ts,jsx,tsx}",
+    "./src/pages/*.{js,ts,jsx,tsx,html,vue}",
+    "./src/components/*.{js,ts,jsx,tsx,html,vue}",
+    ".src/App.vue",
     ],
     theme: {
       extend: {},
