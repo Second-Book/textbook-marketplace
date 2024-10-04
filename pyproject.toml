@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "textbook-marketplace"
+version = "0.1.0"
+description = ""
+authors = ["mrezvova <rezvmaria@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.1"
+psycopg2-binary = "^2.9.9"
+django-cors-headers = "^4.4.0"
+django-filter = "^24.3"
+djangorestframework = "^3.15.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2" 
+pytest-django = "^4.8" 
+black = "^23.3"
+flake8 = "^6.0" 
+isort = "^5.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
