@@ -162,8 +162,7 @@ cython_debug/
 #.idea/
 
 # Python
-.poetry.lock
+poetry.lock
 # JavaScript
-*.pnpm-lock.yaml
-*.yarn.lock
-
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
