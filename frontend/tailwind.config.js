@@ -5,6 +5,8 @@
     "./src/pages/*.{js,ts,jsx,tsx,html,vue}",
     "./src/components/*.{js,ts,jsx,tsx,html,vue}",
     ".src/App.vue",
+    './frontend/src/**/*.{vue,js,ts}',
+    './frontend/src/*.{vue,js,ts}',
     ],
     theme: {
       extend: {},
