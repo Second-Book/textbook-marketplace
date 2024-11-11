@@ -166,3 +166,5 @@ poetry.lock
 # JavaScript
 frontend/yarn.lock
 frontend/pnpm-lock.yaml
+
+backend/textbook_marketplace/media/textbook_images
