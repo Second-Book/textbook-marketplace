@@ -16,4 +16,13 @@ export default {
   deleteTextbook(id) {
     return apiClient.delete(`/textbooks/${id}/`);
   },
+  login(credentials) {
+    return apiClient.post('token/', credentials);
+  },
+  refreshToken() {
+    return apiClient.post('token/refresh/', { refresh: localStorage.getItem('refresh_token') });
+  },
+  signup(credentials) {
+    return apiClient.post('signup/', credentials);
+  }
 };

@@ -1,12 +1,5 @@
 <template>
   <div class="flex flex-col pb-5 bg-white">
-    <header class="flex flex-wrap gap-5 justify-between px-6 py-4 w-full text-white bg-rose-800 max-md:pr-5 max-md:max-w-full">
-      <h1 class="text-2xl font-bold leading-none">EduMarket</h1>
-      <nav class="flex gap-10 self-start mt-1 text-xl leading-tight text-center">
-        <a href="#" class="focus:outline-none focus:ring-2 focus:ring-white">Sign In</a>
-        <a href="#" class="focus:outline-none focus:ring-2 focus:ring-white">Sign Up</a>
-      </nav>
-    </header>
     <main class="flex flex-col items-center px-6 mt-6 w-full max-md:pl-5 max-md:max-w-full">
       <h2 class="self-center text-3xl font-bold leading-tight text-blue-900 text-center w-2/3">Find Cheap Textbooks</h2>
       <form class="flex flex-wrap gap-4 mt-4 text-base max-md:mr-2.5 max-md:max-w-full w-2/3 mx-auto" @submit.prevent="searchTextbooks">
@@ -21,7 +14,7 @@
         <label for="sortCriteria" class="sr-only">Sort by</label>
         <select id="sortCriteria" v-model="sortCriteria" class="p-2.5 bg-white rounded-lg border border-blue-900 border-solid text-zinc-400">
           <option value="title">Title</option>
-          <option value="author">Author</option>
+          <option value="school_class">School_Class</option>
           <option value="publisher">Publisher</option>
           <option value="price">Price</option>
         </select>
@@ -30,8 +23,9 @@
         </button>
       </form>
       <section class="mt-14 max-md:mt-10 max-md:max-w-full w-2/3 mx-auto">
-        <div class="flex gap-5 max-md:flex-col">
-          <TextbookCard
+        <div class="textbook-grid">
+
+            <TextbookCard
             v-for="(textbook, index) in textbooks"
             :key="index"
             :image="textbook.image"
@@ -41,8 +35,6 @@
             :price="parseFloat(textbook.price).toFixed(2) + '€'"
             :id="textbook.id"
           />
-                      <!-- :image-src="textbook.imageSrc" -->
-
         </div>
       </section>
     </main>
@@ -58,6 +50,7 @@ export default {
   components: {
     TextbookCard
   },
+  
   data() {
     return {
       searchQuery: '',
@@ -74,8 +67,8 @@ export default {
         return [...this.textbooks].sort((a, b) => a.price - b.price);
       }
 
-      if (this.sortCriteria === 'title') {
-        return [...this.textbooks].sort((a, b) => a.title.localeCompare(b.title));
+      if (this.sortCriteria === 'school_class') {
+        return [...this.textbooks].sort((a, b) => a.school_class.localeCompare(b.school_class));
       }
 
       if (this.sortCriteria === 'author') {
@@ -109,6 +102,7 @@ export default {
       this.textbooks = this.textbooks.filter(textbook => {
         return (
           textbook.price.toString().includes(this.searchQuery) ||
+          textbook.school_class.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           textbook.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           textbook.author.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           textbook.publisher.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -142,5 +136,10 @@ export default {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+.textbook-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
 }
 </style>

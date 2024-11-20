@@ -26,9 +26,7 @@ SECRET_KEY = "django-insecure-#eqcc2lp6^08)2-t!tev3_(1&j*^4j5pl#roe(c&p_c+4+dv4t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '[::1]', 'localhost', '192.168.0.44:8080']
-
-
+ALLOWED_HOSTS = ['127.0.0.1', '[::1]', 'localhost', '192.168.0.44:8080', '127.0.0.1:8000']
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,9 +37,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.postgres',
+    'django.contrib.sites',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google', 
+    # 'rest_framework.authtoken',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     "textbook_marketplace",
-    "rest_framework",
     "marketplace",
 ]
 
@@ -136,8 +141,14 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': [ 'rest_framework.authentication.BasicAuthentication', 'rest_framework.authentication.SessionAuthentication', ],
-                   'DEFAULT_PERMISSION_CLASSES': [ 'rest_framework.permissions.IsAuthenticatedOrReadOnly', ], }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.44:8080",
@@ -151,4 +162,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # This is the URL that serves the media files
 MEDIA_URL = '/media/'
+
+# AUTHENTICATION_BACKENDS = (
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# )
+
+SITE_ID = 1
 
