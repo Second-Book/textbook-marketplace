@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    "textbook_marketplace",
     "marketplace",
 ]
 
@@ -175,4 +174,4 @@ SIMPLE_JWT = {
     'USER_MODEL': 'marketplace.User',
 }
 
-# AUTH_USER_MODEL = "myapp.MyUser"
+AUTH_USER_MODEL = "marketplace.User"
