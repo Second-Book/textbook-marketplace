@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-5 p-5 bg-white rounded shadow-md relative">
-    <img :src="image" :alt="title" class="object-contain aspect-[0.67] w-[200px]" />
+    <img :src="image" :alt="title" class="object-contain aspect-[0.67] w-[400px]" />
     <button class="details-button absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" @click="$router.push({ name: 'Textbook', params: { id: id } })">
       Details
     </button>
@@ -78,7 +78,7 @@ export default {
 .details-button {
   background-color: #000;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 30px;
   border: none;
   border-radius: 5px;
   cursor: pointer;

@@ -1,14 +1,22 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from rest_framework import status
-from .serializers import SignupSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Textbook, User
-from .serializers import TextbookSerializer
+from .serializers import TextbookSerializer, SignupSerializer, CustomTokenObtainPairSerializer
+
+
+class IsAuthenticatedOrReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return True
+        return request.user.is_authenticated
+    
 
 class TextbookListView(APIView):
-    permission_classes = []  # Allow unauthenticated requests
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         textbooks = Textbook.objects.all()
         serializer = TextbookSerializer(textbooks, many=True)
@@ -50,7 +58,6 @@ class ProtectedView(APIView):
     
 
 class SignupView(APIView):
-    permission_classes = []  # Allow unauthenticated requests
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
@@ -58,3 +65,21 @@ class SignupView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+class PersonalCabinetView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        pass
+
+    def post(self, request):
+        
+        pass
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
+
+    def get_queryset(self):
+        return User.objects.all()

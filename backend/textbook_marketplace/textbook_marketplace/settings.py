@@ -145,9 +145,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
 }
 
 CORS_ALLOWED_ORIGINS = [
@@ -169,3 +169,10 @@ MEDIA_URL = '/media/'
 
 SITE_ID = 1
 
+AUTH_PASSWORD_VALIDATORS = []
+
+SIMPLE_JWT = {
+    'USER_MODEL': 'marketplace.User',
+}
+
+# AUTH_USER_MODEL = "myapp.MyUser"

@@ -36,6 +36,7 @@ export default {
           try {
               await authService.login(this.credentials);
               this.$router.push('/textbooks'); // Redirect to the textbooks page
+              this.$store.commit('SET_AUTHENTICATED', true);
           } catch (error) {
               this.errorMessage = 'Invalid username or password';
           }

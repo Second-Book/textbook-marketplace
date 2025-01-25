@@ -1,16 +1,26 @@
 <template>
   <div id="app">
-    <Navbar />
+    <AuthenticatedNavbar v-if="isLoggedIn" />
+    <Navbar v-else />
     <router-view />
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
+import AuthenticatedNavbar from './components/AuthenticatedNavbar.vue';
+
 export default {
   name: 'App',
   components: {
-    Navbar
+    Navbar,
+    AuthenticatedNavbar
+  },
+  computed: {
+    isLoggedIn() {
+      console.log(this.$store);
+      return this.$store.state.isAuthenticated;
+    }
   }
 };
 </script>
