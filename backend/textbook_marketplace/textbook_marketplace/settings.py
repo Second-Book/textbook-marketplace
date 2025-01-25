@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     "marketplace",
+    'versatileimagefield',
 ]
 
 MIDDLEWARE = [
@@ -175,3 +176,15 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = "marketplace.User"
+
+VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
+    'marketplace': [
+        ('full_size', 'url'),
+        ('preview', 'thumbnail__240x312'),
+        ('detail', 'crop__324x420'),
+    ]
+}
+
+VERSATILEIMAGEFIELD_SETTINGS = {
+    'jpeg_resize_quality': 90,
+}

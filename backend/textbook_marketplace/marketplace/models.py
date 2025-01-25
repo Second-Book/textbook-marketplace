@@ -1,4 +1,5 @@
 from django.db import models
+from versatileimagefield.fields import VersatileImageField
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 class User(AbstractUser):
@@ -30,7 +31,7 @@ class Textbook(models.Model):
         ('Used - Good', 'Used - Good'),
         ('Used - Fair', 'Used - Fair'),
     ], default='Used - Good')
-    image = models.ImageField(upload_to='textbook_images/', null=True, blank=True)
+    image = VersatileImageField(upload_to='textbook_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)  
     updated_at = models.DateTimeField(auto_now=True) 
 

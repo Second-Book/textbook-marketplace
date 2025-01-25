@@ -4,13 +4,18 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.exceptions import ValidationError
 
 from .models import Textbook, User, Order 
+from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 
 class TextbookSerializer(serializers.ModelSerializer):
     seller = serializers.ReadOnlyField(source='seller.username')
+    image = VersatileImageFieldSerializer(
+        sizes='marketplace',
+    )
     class Meta:
         model = Textbook
         fields = '__all__'
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
