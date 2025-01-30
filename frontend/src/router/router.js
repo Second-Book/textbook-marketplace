@@ -3,6 +3,7 @@ import TextbookSearch from '../pages/TextbookSearch.vue';
 import Textbook from '../pages/Textbook.vue';
 import Login from '../components/login.vue';
 import Signup from '../components/signup.vue';
+import NewTextbook from '@/pages/NewTextbook.vue';
 
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     path: '/textbook/:id',
     name: 'Textbook',
     component: Textbook,
+  },
+  {
+    path: '/newtextbook',
+    name: 'NewTextbook',
+    component: NewTextbook,
   },
   {
     path: '/textbooks',

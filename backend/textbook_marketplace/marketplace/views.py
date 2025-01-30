@@ -1,11 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
-from rest_framework import status
+from rest_framework import status, viewsets, permissions
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.decorators import action, api_view
 
-from .models import Textbook, User
-from .serializers import TextbookSerializer, SignupSerializer, CustomTokenObtainPairSerializer
+from .models import Textbook, User, Order
+from .serializers import TextbookSerializer, SignupSerializer, CustomTokenObtainPairSerializer, UserSerializer, OrderSerializer
 
 
 class IsAuthenticatedOrReadOnly(BasePermission):
@@ -83,3 +84,31 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
     def get_queryset(self):
         return User.objects.all()
+
+class TextbookViewSet(viewsets.ModelViewSet):
+    queryset = Textbook.objects.all()
+    serializer_class = TextbookSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    @action(detail=False, methods=['post'])
+    def create_textbook(self, request):
+        serializer = TextbookSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(seller=request.user)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+@api_view(['GET'])
+def get_user_data(request):
+    if request.method == 'GET':
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)

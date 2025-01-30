@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col gap-5 p-5 bg-white rounded shadow-md relative">
-    <img :src="image" :alt="title" class="object-contain aspect-[0.67] w-[400px]" />
+  <div class="textbook-card flex flex-col gap-5 p-5 bg-white rounded shadow-md relative">
+    <img :src="image" :alt="title" class="object-contain w-[240px] h-[312px]" />
     <button class="details-button absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" @click="$router.push({ name: 'Textbook', params: { id: id } })">
       Details
     </button>
@@ -103,5 +103,10 @@ export default {
 
 .relative:hover .add-to-cart-button {
   opacity: 1;
+}
+
+.textbook-card {
+  flex: 1 1 calc(25% - 1rem);
+  margin: 0.5rem;
 }
 </style>

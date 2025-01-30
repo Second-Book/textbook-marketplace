@@ -1,7 +1,7 @@
 <template>
   <div class="w-[1440px] h-[1024px] relative bg-white overflow-hidden">
     <div class="left-[150px] top-[17px] absolute">
-      <img class="w-[100px] h-[100px] left-[1048px] top-0 absolute" :src="imageUrl" alt="Textbook Image" />
+      <img class="w-[100px] h-[100px] left-[1048px] top-0 absolute" :src="image.detail" alt="Textbook Image" />
     </div>
     <img class="w-3.5 h-[1024px] left-[1426px] top-0 absolute" src="https://via.placeholder.com/14x1024" />
     <div class="w-[480px] h-[47px] left-[150px] top-[136px] absolute text-black text-3xl font-bold font-['Inter']">{{ title }}</div>
@@ -62,10 +62,9 @@
       </div>
     </div>
     <div class="w-[483.33px] h-[420px] left-[150px] top-[213px] absolute">
-      <div class="w-[480px] h-[420px] left-0 top-0 absolute bg-[#d9d9d9]"></div>
-      <img class="w-[60px] h-[60px]" src="https://via.placeholder.com/60x60" />
-      <img class="w-[100px] h-[100px] mx-auto" :src="image" style="max-width: 66.67%" />
-      <img class="w-[60px] h-[60px]" src="https://via.placeholder.com/60x60" />
+      <div class="w-[480px] h-[420px] left-0 top-0 absolute bg-[#d9d9d9] flex items-center justify-center">
+        <img class="max-w-full max-h-full" :src="image.detail" alt="Textbook Image" />
+      </div>
     </div>
     <div class="w-[120px] h-[24.23px] left-[1050px] top-[43px] absolute">
       <div class="w-[120px] h-[24.23px] left-0 top-0 absolute rounded-[10px]"></div>
@@ -118,7 +117,10 @@ export default {
         this.phone_contact = response.data.phone_contact;
         this.viber_contact = response.data.viber_contact;
         this.telegram_contact = response.data.telegram_contact;
-        this.image = `http://localhost:8000${response.data.image}`})
+        this.image = {
+          detail: `http://localhost:8000${response.data.image.detail}`,
+        };
+      })
       .catch(error => {
         console.error('Error fetching textbook:', error);
       });

@@ -28,7 +28,7 @@
             <TextbookCard
             v-for="(textbook, index) in textbooks"
             :key="index"
-            :image="textbook.image"
+            :image="textbook.image.preview"
             :title="textbook.title"
             :author="textbook.author"
             :publisher="textbook.publisher"
@@ -87,7 +87,7 @@ export default {
         
         for (let textbook of this.textbooks) {
           textbook.price = parseFloat(textbook.price).toFixed(2);
-          textbook.image = `http://localhost:8000${textbook.image}`
+          textbook.image.preview = `http://localhost:8000${textbook.image.preview}`;
         }
         console.log('Fetched textbooks:', this.textbooks);
       } catch (error) {
