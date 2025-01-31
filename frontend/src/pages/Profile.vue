@@ -12,25 +12,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  data() {
-    return {
-      user: {}
-    };
+  name: 'Profile',
+  computed: {
+    ...mapState(['user']),
   },
-  created() {
-    this.fetchUserData();
-  },
-  methods: {
-    async fetchUserData() {
-      try {
-        const response = await this.$axios.get('/api/users/me/');
-        this.user = response.data;
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    }
-  }
 };
 </script>
 

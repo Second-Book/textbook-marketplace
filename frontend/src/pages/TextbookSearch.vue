@@ -24,8 +24,7 @@
       </form>
       <section class="mt-14 max-md:mt-10 max-md:max-w-full w-2/3 mx-auto">
         <div class="textbook-grid">
-
-            <TextbookCard
+          <TextbookCard
             v-for="(textbook, index) in textbooks"
             :key="index"
             :image="textbook.image.preview"
@@ -50,7 +49,6 @@ export default {
   components: {
     TextbookCard
   },
-  
   data() {
     return {
       searchQuery: '',
@@ -59,35 +57,27 @@ export default {
     };
   },
   computed: {
-    // formattedPrice(price) {
-    //   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-    // },
     sortedTextbooks() {
       if (this.sortCriteria === 'price') {
         return [...this.textbooks].sort((a, b) => a.price - b.price);
       }
-
       if (this.sortCriteria === 'school_class') {
         return [...this.textbooks].sort((a, b) => a.school_class.localeCompare(b.school_class));
       }
-
       if (this.sortCriteria === 'author') {
         return [...this.textbooks].sort((a, b) => a.author.localeCompare(b.author));
-      } 
-      return [...this.textbooks].sort((a, b) => a.price - b.price);
-
+      }
+      return [...this.textbooks].sort((a, b) => a.title.localeCompare(b.title));
     },
-    },
-
+  },
   methods: {
     async fetchTextbooks() {
       try {
         const response = await textbookService.getTextbooks();
         this.textbooks = response.data;
-        
         for (let textbook of this.textbooks) {
           textbook.price = parseFloat(textbook.price).toFixed(2);
-          textbook.image.preview = `http://localhost:8000${textbook.image.preview}`;
+          textbook.image.preview = `${textbook.image.preview}`;
         }
         console.log('Fetched textbooks:', this.textbooks);
       } catch (error) {
@@ -122,7 +112,6 @@ export default {
     this.fetchTextbooks();
   }
 };
-
 </script>
 
 <style scoped>

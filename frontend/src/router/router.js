@@ -4,7 +4,8 @@ import Textbook from '../pages/Textbook.vue';
 import Login from '../components/login.vue';
 import Signup from '../components/signup.vue';
 import NewTextbook from '@/pages/NewTextbook.vue';
-
+import Profile from '../pages/Profile.vue';
+import store from '../store/index'; // Assuming you have a Vuex store
 
 const routes = [
   {
@@ -23,14 +24,20 @@ const routes = [
     component: Textbook,
   },
   {
-    path: '/newtextbook',
-    name: 'NewTextbook',
-    component: NewTextbook,
-  },
-  {
     path: '/textbooks',
     name: 'TextbooksSearch',
     component: TextbookSearch,
+  },
+  {
+    path: '/new-textbook',
+    name: 'NewTextbook',
+    component: NewTextbook
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: { requiresAuth: true }
   },
   {
     path: '/',
@@ -41,6 +48,18 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.state.isAuthenticated) {
+      next({ name: 'Login' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

@@ -34,9 +34,10 @@ export default {
   methods: {
       async login() {
           try {
-              await authService.login(this.credentials);
-              this.$router.push('/textbooks'); // Redirect to the textbooks page
-              this.$store.commit('SET_AUTHENTICATED', true);
+              const response = await authService.login(this.credentials);
+              this.$store.commit('setAuthentication', true);
+              this.$store.commit('setUser', response.user);
+              this.$router.push('/'); // Redirect to the home page
           } catch (error) {
               this.errorMessage = 'Invalid username or password';
           }
