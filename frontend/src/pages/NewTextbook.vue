@@ -65,7 +65,13 @@
 </template>
 
 <script>
+import textbookService from '../services/TextbookService.js';
+import { mapState } from 'vuex';
+
 export default {
+  computed: {
+    ...mapState(['user']),
+  },
   data() {
     return {
       form: {
@@ -80,7 +86,7 @@ export default {
         whatsapp_contact: '',
         viber_contact: '',
         telegram_contact: '',
-        phone_contact: ''
+        phone_contact: '',
       }
     };
   },
@@ -93,9 +99,16 @@ export default {
       for (const key in this.form) {
         formData.append(key, this.form[key]);
       }
+
       try {
-        await this.$axios.post('/api/textbooks/', formData);
-        this.$router.push('/textbooks');
+        const token = localStorage.getItem('access_token');
+        await textbookService.createTextbook(formData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        this.$router.push('/profile');
       } catch (error) {
         console.error('Error adding textbook:', error);
       }

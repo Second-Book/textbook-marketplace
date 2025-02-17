@@ -5,6 +5,7 @@ import Login from '../components/login.vue';
 import Signup from '../components/signup.vue';
 import NewTextbook from '@/pages/NewTextbook.vue';
 import Profile from '../pages/Profile.vue';
+import Expprofile from '../components/Expprofile.vue';
 import store from '../store/index'; // Assuming you have a Vuex store
 
 const routes = [
@@ -42,6 +43,11 @@ const routes = [
   {
     path: '/',
     redirect: '/textbooks',
+  },
+  {
+    path: '/expprofile',
+    name: 'Expprofile',
+    component: Expprofile,
   },
 ];
 

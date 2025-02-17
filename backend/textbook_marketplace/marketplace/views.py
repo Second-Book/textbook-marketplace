@@ -26,7 +26,7 @@ class TextbookListView(APIView):
     def post(self, request):
         serializer = TextbookSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(seller=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -92,7 +92,8 @@ class TextbookViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def create_textbook(self, request):
-        serializer = TextbookSerializer(data=request.data)
+        print(request.data, request.user)
+        serializer = TextbookSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save(seller=request.user)
             return Response(serializer.data, status=201)
@@ -112,3 +113,12 @@ def get_user_data(request):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+class UserDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    

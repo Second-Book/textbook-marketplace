@@ -7,22 +7,13 @@ export default {
   getTextbook(id) {
     return apiClient.get(`/textbook/${id}/`);
   },
-  createTextbook(textbook) {
-    return apiClient.post('/textbooks/', textbook);
+  createTextbook(textbook, config) {
+    return apiClient.post('/textbook/create/', textbook, config);
   },
   updateTextbook(id, textbook) {
     return apiClient.put(`/textbooks/${id}/`, textbook);
   },
   deleteTextbook(id) {
     return apiClient.delete(`/textbooks/${id}/`);
-  },
-  login(credentials) {
-    return apiClient.post('token/', credentials);
-  },
-  refreshToken() {
-    return apiClient.post('token/refresh/', { refresh: localStorage.getItem('refresh_token') });
-  },
-  signup(credentials) {
-    return apiClient.post('signup/', credentials);
   }
 };

@@ -157,6 +157,8 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 # This is where uploaded files will be stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

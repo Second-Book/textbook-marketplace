@@ -74,10 +74,11 @@ export default {
     async fetchTextbooks() {
       try {
         const response = await textbookService.getTextbooks();
+        const baseUrl = 'http://127.0.0.1:8000';
         this.textbooks = response.data;
         for (let textbook of this.textbooks) {
           textbook.price = parseFloat(textbook.price).toFixed(2);
-          textbook.image.preview = `${textbook.image.preview}`;
+          textbook.image.preview = `${baseUrl}${textbook.image.preview}`;
         }
         console.log('Fetched textbooks:', this.textbooks);
       } catch (error) {

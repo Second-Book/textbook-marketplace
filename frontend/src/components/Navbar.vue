@@ -4,16 +4,17 @@
       <a href="/textbooks" class="text-2xl font-bold leading-none mr-4">EduMarket</a>
     </div>
     <nav class="flex gap-10 text-xl leading-tight justify-center w-full max-w-2xl">
-      <a v-if="!isAuthenticated" href="/login" class="focus:outline-none focus:ring-2 focus:ring-white">Sign In</a>
-      <a v-if="!isAuthenticated" href="/signup" class="focus:outline-none focus:ring-2 focus:ring-white">Sign Up</a>
-      <a v-if="isAuthenticated" href="/profile" class="focus:outline-none focus:ring-2 focus:ring-white">Profile</a>
+      <router-link v-if="!isAuthenticated" to="/login" class="focus:outline-none focus:ring-2 focus:ring-white">Sign In</router-link>
+      <router-link v-if="!isAuthenticated" to="/signup" class="focus:outline-none focus:ring-2 focus:ring-white">Sign Up</router-link>
+      <router-link v-if="isAuthenticated" to="/profile" class="focus:outline-none focus:ring-2 focus:ring-white">Profile</router-link>
       <a v-if="isAuthenticated" @click="handleLogout" class="focus:outline-none focus:ring-2 focus:ring-white">Logout</a>
     </nav>
   </header>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
+import authService from '../services/authService';
 
 export default {
   name: 'Navbar',
@@ -21,10 +22,10 @@ export default {
     ...mapState(['isAuthenticated']),
   },
   methods: {
-    ...mapActions(['logout']),
-    handleLogout() {
-      this.logout();
-      this.$router.push({ name: 'TextbooksSearch' });
+    async handleLogout() {
+      await authService.logout();
+      this.$store.commit('setAuthentication', false);
+      this.$router.push('/');
     }
   }
 };
