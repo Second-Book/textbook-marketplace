@@ -17,12 +17,16 @@ class IsAuthenticatedOrReadOnly(BasePermission):
     
 
 class TextbookListView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
-        textbooks = Textbook.objects.all()
+        username = request.query_params.get('username', None)
+        if username:
+            textbooks = Textbook.objects.filter(seller__username=username)
+        else:
+            textbooks = Textbook.objects.all()
+            
         serializer = TextbookSerializer(textbooks, many=True)
         return Response(serializer.data)
-
+    
     def post(self, request):
         serializer = TextbookSerializer(data=request.data)
         if serializer.is_valid():

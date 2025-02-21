@@ -4,9 +4,8 @@ import Textbook from '../pages/Textbook.vue';
 import Login from '../components/login.vue';
 import Signup from '../components/signup.vue';
 import NewTextbook from '@/pages/NewTextbook.vue';
-import Profile from '../pages/Profile.vue';
-import Expprofile from '../components/Expprofile.vue';
-import store from '../store/index'; // Assuming you have a Vuex store
+import store from '../store/index'; 
+import UserProfile from '@/pages/UserProfile.vue';
 
 const routes = [
   {
@@ -36,18 +35,13 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'Profile',
-    component: Profile,
+    name: 'UserProfile',
+    component: UserProfile,
     meta: { requiresAuth: true }
   },
   {
     path: '/',
     redirect: '/textbooks',
-  },
-  {
-    path: '/expprofile',
-    name: 'Expprofile',
-    component: Expprofile,
   },
 ];
 

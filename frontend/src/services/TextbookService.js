@@ -4,6 +4,11 @@ export default {
   getTextbooks(params) {
     return apiClient.get('/textbooks/', { params });
   },
+  getUserTextbooks(username) {
+    return apiClient.get('/textbooks/', { 
+      params: { username }
+    });
+  },
   getTextbook(id) {
     return apiClient.get(`/textbook/${id}/`);
   },
