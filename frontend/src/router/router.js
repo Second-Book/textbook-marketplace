@@ -5,7 +5,7 @@ import Login from '../components/login.vue';
 import Signup from '../components/signup.vue';
 import NewTextbook from '@/pages/NewTextbook.vue';
 import store from '../store/index'; 
-import UserProfile from '@/pages/UserProfile.vue';
+import UserProfile from '@/pages/Profile.vue';
 
 const routes = [
   {

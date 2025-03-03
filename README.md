@@ -1,4 +1,5 @@
 # textbook-marketplace
 
-разрешение 240*312
-324*420
+dimentions of img:
+240 * 312
+324 * 420
