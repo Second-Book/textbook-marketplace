@@ -61,7 +61,6 @@ export default {
     try {
       const response = await textbookService.getTextbook(this.id);
       this.textbook = response.data;
-      console.log('Fetched textbooks:', this.textbook);
     } catch (error) {
       console.error('Error fetching textbooks:', error);
     }
@@ -69,6 +68,7 @@ export default {
   },
   created() {
   this.fetchTextbooks();
+  console.log(this.$props.image)
   },
 };
 </script>
