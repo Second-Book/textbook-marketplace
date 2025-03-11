@@ -21,6 +21,7 @@ rest-framework-simplejwt = "^0.0.2"
 wheel = "^0.45.1"
 faker = "^35.0.0"
 django-versatileimagefield = "^3.1"
+python-decouple = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2" 
