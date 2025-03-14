@@ -168,3 +168,7 @@ frontend/yarn.lock
 frontend/pnpm-lock.yaml
 
 /backend/textbook_marketplace/media/
+
+/backend/textbook_marketplace/static/
+/backend/textbook_marketplace/staticfiles/
+
